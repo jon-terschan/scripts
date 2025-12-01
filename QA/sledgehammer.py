@@ -5,7 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 # buncha inputs
-SOURCE_FOLDER = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\processed\3_QA\output"
+SOURCE_FOLDER = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\processed\4_finetuning\source"
 OUT_FOLDER = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\processed\4_finetuning\output"
 FIG_FOLDER = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\processed\4_finetuning\figures"
 ipol_limit = 20 # how many entries can the gap be 
@@ -76,6 +76,25 @@ def create_figure(df, cleaned_name, figure_folder):
 
     return fig_path
 
+def flag_out_of_soil_span(df, start, end):
+    """
+    Mark a datetime span as out-of-soil (OOS=1).
+    Creates column 'OOS' if it does not exist.
+    """
+    start = pd.to_datetime(start, utc=True)
+    end   = pd.to_datetime(end,   utc=True)
+
+    # ensure the column exists
+    if "OOS" not in df.columns:
+        df["OOS"] = 0
+
+    mask = (df['datetime'] >= start) & (df['datetime'] <= end)
+    df.loc[mask, "OOS"] = 1
+
+    print(f"Flagged {mask.sum()} rows as Out-of-Soil (OOS=1).")
+    return df
+
+
 ####################################################
 # DATA EDITING FUNCTIONS
 ####################################################
@@ -86,16 +105,26 @@ def remove_values(df, col, timestamps):
     print(f"Removed {mask.sum()} values from {col}.")
     return df
 
-def remove_values_span(df, col, start, end):
+def remove_values_span(df, col, start, end, flag_oos=False):
     start = pd.to_datetime(start, utc=True)
     end   = pd.to_datetime(end,   utc=True)
     mask  = (df['datetime'] >= start) & (df['datetime'] <= end)
+
+    # set column values to NaN
     df.loc[mask, col] = np.nan
     print(f"Removed {mask.sum()} entries in {col} from {start} to {end}.")
+
+    # optionally flag out-of-soil
+    if flag_oos:
+        if "OOS" not in df.columns:
+            df["OOS"] = 0
+        df.loc[mask, "OOS"] = 1
+        print(f"Flagged {mask.sum()} rows as Out-of-Soil (OOS=1).")
+
     return df
 
 def remove_rows(df, timestamps=None, start=None, end=None, by_date=False):
-    # this is some vibecoding chatgpt shit, i havent checked if it works yet
+    # this is some vibecoding github copilot shit, i havent checked if it works yet
     """
     Remove rows from df in several flexible ways.
     - timestamps: scalar or list of strings/Timestamps
@@ -184,8 +213,9 @@ def edit_file(serial, source_folder, output_folder, figure_folder, edits_fn):
 # NESTED MASTER FUNCTION SETTINGS
 def my_edits(df):
     #df = remove_values(df, "t1", ["2024-07-01 00:00"])
-    #df = remove_values_span(df, "t1", "2024-06-11", "2024-06-18")
-    #df = remove_rows(df, ["2024-04-25"], by_date=True)
+    df = remove_values_span(df, "t1", "2024-05-06", "2024-05-11", flag_oos=True)
+    df = remove_values_span(df, "t1", "2024-07-31", "2024-09-23", flag_oos=True)
+    #df = remove_rows(df, start="2024-06-10", end="2024-06-12")
     #df = interpolate_missing(df, 20)
     return df
 
@@ -201,9 +231,11 @@ def my_edits(df):
 
 ### EXECUTE
 edit_file(
-    serial="94226108",
+    serial="94226128",
     source_folder=SOURCE_FOLDER,
     output_folder=OUT_FOLDER,
     figure_folder=FIG_FOLDER,
     edits_fn=my_edits
 )
+
+
