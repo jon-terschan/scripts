@@ -43,6 +43,29 @@ def detect_logger_type(df):
         return "TL"
     return "TMS"
 
+def detect_gaps(df):
+    """
+    Detect rows where t1, t2, AND t3 are all missing.
+    Creates/updates column 'gap_flag':
+        gap_flag = 1 → all three temperatures are missing
+        gap_flag = 0 → otherwise
+    """
+    cols = ['t1', 't2', 't3']
+
+    # use only columns that actually exist (TL logger may not have t1/t2)
+    existing = [c for c in cols if c in df.columns]
+
+    if len(existing) < 3:
+        print("Warning: Not all t1, t2, t3 columns exist — gap_flag will only be 1 if all existing ones are NaN.")
+
+    # gap = all selected columns missing
+    df['gap_flag'] = df[existing].isna().all(axis=1).astype(int)
+
+    print(f"Marked {df['gap_flag'].sum()} rows where ALL temperatures are missing (gap_flag=1).")
+
+    return df
+
+
 # create my beautiful figure mwah mwah
 def create_figure(df, cleaned_name, figure_folder):
     logger_type = detect_logger_type(df)
@@ -212,11 +235,13 @@ def edit_file(serial, source_folder, output_folder, figure_folder, edits_fn):
 
 # NESTED MASTER FUNCTION SETTINGS
 def my_edits(df):
-    #df = remove_values(df, "t1", ["2024-07-01 00:00"])
-    df = remove_values_span(df, "t1", "2024-06-01", "2024-09-26", flag_oos=True)
+    df = remove_rows(df, timestamps=["2024-07-06 02:30","2024-07-06 02:45","2024-07-06 03:00",
+                                     "2024-07-06 03:15","2024-07-06 03:30"], by_date=True)
+    #df = remove_values_span(df, "t1", "2024-08-25", "2024-11-11", flag_oos=True)
     #df = remove_values_span(df, "t1", "2024-07-31", "2024-09-23", flag_oos=True)
-    #df = remove_rows(df, start="2024-01-01", end="2024-04-26")
-    #df = interpolate_missing(df, 20)
+    #df = remove_rows(df, start="2024-06-19", end="2024-06-21")
+    df = interpolate_missing(df, 20)
+    #df = detect_gaps(df)
     return df
 
 ## DOCUMENTATION 
@@ -231,7 +256,7 @@ def my_edits(df):
 
 ### EXECUTE
 edit_file(
-    serial="94290008",
+    serial="94290007",
     source_folder=SOURCE_FOLDER,
     output_folder=OUT_FOLDER,
     figure_folder=FIG_FOLDER,
