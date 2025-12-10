@@ -5,7 +5,7 @@ from matplotlib.widgets import Slider
 import geopandas as gpd
 
 """
-Side-by-side ERA vs CERRA viewer, completely vibecoded and held together
+Side-by-side ERA vs CERRA viewer, vibecoded asf and held together
 by a worm on a string.
 """
 
