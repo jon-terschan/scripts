@@ -24,7 +24,7 @@ minx, miny, maxx, maxy = line_layer.total_bounds
 def main():
     # -------------------------
     era_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA_SUMMER_24_25_HEL.netcdf"
-    cer_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\CERRA_SUMMER_24_25_HEL.netcdf"
+    cer_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\CERRA\CERRA_SUMMER_24_25_HEL.netcdf"
     var = "t2m"
     # -------------------------
 
