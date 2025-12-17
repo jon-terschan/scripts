@@ -50,8 +50,8 @@ era_request = {
         "10m_v_component_of_wind",
         "total_precipitation"
     ],
-    "year": ["2025"],
-    "month": ["09"], # "06","07" "08", "09"
+    "year": ["2024"],
+    "month": ["05"], # "06","07" "08", "09"
     "day": [
         "01", "02", "03",
         "04", "05", "06",
@@ -77,9 +77,13 @@ era_request = {
     ],
     "data_format": "netcdf",
     "download_format": "unarchived",
-    "area": [60.02, 24.7, 60.3, 25.30]
+    "area": [59.93, 24.52, 60.41, 25.38] # helsinki north
 }
-era_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA_SUMMER_25_09_HEL.netcdf" # target folder and name
+
+#"area": [59.9, 24.5, 60.4, 25.4] # regular grid, original
+#"area": [60.02, 24.7, 60.35, 25.30] helsinki south
+
+era_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_24_05_LARGE_a.netcdf" # target folder and name
 client.retrieve(dataset_era, era_request, era_target) # execute API request
 
 # dummy testing code provided in documentation
