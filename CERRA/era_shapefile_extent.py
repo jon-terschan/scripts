@@ -4,10 +4,7 @@ import numpy as np
 import xarray as xr 
 
 #path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\combined\ERA_SUMMER_24_25_HEL.netcdf"
-
-path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_24_05_HELHOLE.netcdf"
-era_new = xr.open_dataset(path)
-path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_24_05_LARGE_a.netcdf"
+path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_24_05.netcdf"
 era = xr.open_dataset(path)
 
 
@@ -30,7 +27,7 @@ era_centers = gpd.GeoDataFrame(
     geometry=gpd.points_from_xy(lon_flat, lat_flat),
     crs="EPSG:4326"
 )
-out_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\era5_grid_centers_large_t.gpkg"
+out_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\era5_centers.gpkg"
 
 era_centers.to_file(
     out_path,

@@ -2,22 +2,27 @@ import xarray as xr
 import os
 from glob import glob
 import dask
+import numpy as np
 
 # define inputs
-folder = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA"
+com_folder = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA"
+folder = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH"
 files = sorted(glob(os.path.join(folder, "ERA_SUMMER_*.netcdf")))
 
 datasets = [xr.open_dataset(f) for f in files]
 era = xr.concat(datasets, dim="valid_time") # concat files
 # era = xr.open_mfdataset(files, combine="by_coords", join="inner") # concat alternative but uses dask
 
+# calculate wind speed
+era["wind_s"] = np.sqrt(era["u10"]**2 + era["v10"]**2)
+
 # export file
-out = os.path.join(folder, "combined", "ERA_SUMMER_24_25_HEL.netcdf") # output path
+out = os.path.join(com_folder, "combined", "ERA_SUMMER_24_25_HEL.netcdf") # output path
 era.to_netcdf(out) 
 print("imdone")
 
 # CHECK INTEGRITY OF FILE
-path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\combined\ERA_SUMMER_24_25_HEL_2.netcdf"
+path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\combined\ERA_SUMMER_24_25_HEL.netcdf"
 era = xr.open_dataset(path)
 
 # CONCAT TWO FILES DEPRECATED
