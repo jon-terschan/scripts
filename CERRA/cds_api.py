@@ -1,11 +1,11 @@
-# BEAUTIFUL CDS IMPORT SCRIPT, IT NOW WORKS YEE
 # REFERENCE: https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+Windows
-# import api, only works if the corresponding file with the key has been set up correctly
+# import api, only works if the corresponding key file has been set up correctly
 import cdsapi
-  
+
 # initialize API 
 client = cdsapi.Client()
 
+# CERRA 
 dataset = "reanalysis-cerra-single-levels" #CERRA
 # CERRA API REQUEST
 cerra_request = {
@@ -37,10 +37,11 @@ cerra_request = {
     #"download_format": "unarchived",
     #"area": [60.05, 24.7, 60.3, 25.28] #CERRA is on some weird grid and shouldnt be handled like that
 }
-cerra_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\CERRA_SUMMER_24_25.netcdf" # target folder and name
-client.retrieve(dataset, cerra_request, cerra_target) # execute API request
 
-# ERA5 API REQUEST
+#cerra_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\CERRA_SUMMER_24_25.netcdf" # target folder and name
+#client.retrieve(dataset, cerra_request, cerra_target) # execute API request
+
+# ERA5-LAND REQUEST
 dataset_era = "reanalysis-era5-land" #era5-land
 era_request = {
     "variable": [
@@ -50,8 +51,8 @@ era_request = {
         "10m_v_component_of_wind",
         "total_precipitation"
     ],
-    "year": ["2024"],
-    "month": ["05"], # "06","07" "08", "09"
+    "year": ["2025"],
+    "month": ["09"], # "06","07" "08", "09"
     "day": [
         "01", "02", "03",
         "04", "05", "06",
@@ -77,13 +78,12 @@ era_request = {
     ],
     "data_format": "netcdf",
     "download_format": "unarchived",
-    "area": [59.93, 24.52, 60.41, 25.38] # helsinki north
+    "area": [59.9, 24.5, 60.4, 25.4] # regular grid
 }
 
-#"area": [59.9, 24.5, 60.4, 25.4] # regular grid, original
-#"area": [60.02, 24.7, 60.35, 25.30] helsinki south
+#"area": [60.02, 24.7, 60.35, 25.30] initial request
 
-era_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_24_05_LARGE_a.netcdf" # target folder and name
+era_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_25_09.netcdf" # target folder and name
 client.retrieve(dataset_era, era_request, era_target) # execute API request
 
 # dummy testing code provided in documentation
