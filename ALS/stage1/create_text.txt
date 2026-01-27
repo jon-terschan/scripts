@@ -1,0 +1,1 @@
+ls -1 tiles/*.laz | xargs -n 1 basename > tiles.txt

@@ -1,0 +1,12 @@
+------------------------------
+r-env 4.5.1
+https://docs.csc.fi/apps/r-env
+------------------------------
+terra 1.8.54
+
+Attaching package: ‘terra’
+
+The following object is masked from ‘package:lidR’:
+
+    watershed
+

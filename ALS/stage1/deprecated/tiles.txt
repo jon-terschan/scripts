@@ -1,0 +1,4 @@
+/scratch/project_2001208/Jonathan/ALS/stage1/test/tiles/rgb_682494c.laz
+/scratch/project_2001208/Jonathan/ALS/stage1/test/tiles/rgb_682494d.laz
+/scratch/project_2001208/Jonathan/ALS/stage1/test/tiles/rgb_682495a.laz
+/scratch/project_2001208/Jonathan/ALS/stage1/test/tiles/rgb_682495b.laz

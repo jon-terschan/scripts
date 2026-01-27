@@ -1,0 +1,51 @@
+Core tile: /scratch/project_2001208/Jonathan/ALS/stage1/test/tiles/rgb_683495b.laz 
+Reading 6 tiles
+1 files do not have a spatial index. Spatial indexing speeds up tile buffering and spatial queries drastically.
+Files will be indexed on-the-fly. This will take some extra time now but will speed up everything later.
+$rasterize
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dtm/rgb_683494c_DTM_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dtm/rgb_683494d_DTM_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dtm/rgb_683495a_DTM_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dtm/rgb_683495b_DTM_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dtm/rgb_683495c_DTM_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dtm/rgb_683495d_DTM_tmp.tif"
+
+$rasterize.1
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dsm/rgb_683494c_DSM_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dsm/rgb_683494d_DSM_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dsm/rgb_683495a_DSM_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dsm/rgb_683495b_DSM_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dsm/rgb_683495c_DSM_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/dsm/rgb_683495d_DSM_tmp.tif"
+
+$write_las
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/norm/rgb_683494c_norm_tmp.laz"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/norm/rgb_683494d_norm_tmp.laz"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/norm/rgb_683495a_norm_tmp.laz"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/norm/rgb_683495b_norm_tmp.laz"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/norm/rgb_683495c_norm_tmp.laz"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/norm/rgb_683495d_norm_tmp.laz"
+
+$rasterize.2
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chm/rgb_683494c_CHM_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chm/rgb_683494d_CHM_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chm/rgb_683495a_CHM_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chm/rgb_683495b_CHM_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chm/rgb_683495c_CHM_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chm/rgb_683495d_CHM_tmp.tif"
+
+$pit_fill
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chmfill/rgb_683494c_CHM_fill_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chmfill/rgb_683494d_CHM_fill_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chmfill/rgb_683495a_CHM_fill_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chmfill/rgb_683495b_CHM_fill_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chmfill/rgb_683495c_CHM_fill_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_683495b/chmfill/rgb_683495d_CHM_fill_tmp.tif"
+
+Stage 1 (pipeline) finished
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+Stage 2 finished (core tile extracted)

@@ -1,0 +1,8 @@
+Deleting source `/scratch/project_2001208/Jonathan/ALS/stage2//tile_index.gpkg' failed
+Writing layer `tile_index' to data source 
+  `/scratch/project_2001208/Jonathan/ALS/stage2//tile_index.gpkg' using driver `GPKG'
+Writing 9 features with 1 fields and geometry type Polygon.
+Prepared 9 tiles
+Index: /scratch/project_2001208/Jonathan/ALS/stage2//tile_index.gpkg 
+List:  /scratch/project_2001208/Jonathan/ALS/stage2//tiles.txt 
+DONE
