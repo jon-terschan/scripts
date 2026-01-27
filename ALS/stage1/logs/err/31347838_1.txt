@@ -1,0 +1,24 @@
+------------------------------
+r-env 4.5.1
+https://docs.csc.fi/apps/r-env
+------------------------------
+Linking to GEOS 3.13.1, GDAL 3.11.1, PROJ 9.6.2; sf_use_s2() is TRUE
+terra 1.8.54
+
+Attaching package: ‘terra’
+
+The following objects are masked from ‘package:lasR’:
+
+    focal, rasterize
+
+
+Attaching package: ‘lidR’
+
+The following object is masked from ‘package:terra’:
+
+    watershed
+
+The following object is masked from ‘package:sf’:
+
+    st_concave_hull
+

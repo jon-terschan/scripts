@@ -1,0 +1,13 @@
+------------------------------
+r-env 4.5.1
+https://docs.csc.fi/apps/r-env
+------------------------------
+Linking to GEOS 3.13.1, GDAL 3.11.1, PROJ 9.6.2; sf_use_s2() is TRUE
+
+Attaching package: ‘sf’
+
+The following object is masked from ‘package:lidR’:
+
+    st_concave_hull
+
+writing: substituting ENGCRS["Undefined Cartesian SRS with unknown unit"] for missing CRS

@@ -1,0 +1,49 @@
+Core tile: /scratch/project_2001208/Jonathan/ALS/stage1/test/tiles/rgb_682495b.laz 
+Reading 6 tiles
+$rasterize
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dtm/rgb_682494d_DTM_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dtm/rgb_682495b_DTM_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dtm/rgb_682495d_DTM_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dtm/rgb_683494c_DTM_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dtm/rgb_683495a_DTM_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dtm/rgb_683495c_DTM_tmp.tif"
+
+$rasterize.1
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dsm/rgb_682494d_DSM_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dsm/rgb_682495b_DSM_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dsm/rgb_682495d_DSM_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dsm/rgb_683494c_DSM_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dsm/rgb_683495a_DSM_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/dsm/rgb_683495c_DSM_tmp.tif"
+
+$write_las
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/norm/rgb_682494d_norm_tmp.laz"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/norm/rgb_682495b_norm_tmp.laz"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/norm/rgb_682495d_norm_tmp.laz"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/norm/rgb_683494c_norm_tmp.laz"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/norm/rgb_683495a_norm_tmp.laz"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/norm/rgb_683495c_norm_tmp.laz"
+
+$rasterize.2
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chm/rgb_682494d_CHM_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chm/rgb_682495b_CHM_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chm/rgb_682495d_CHM_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chm/rgb_683494c_CHM_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chm/rgb_683495a_CHM_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chm/rgb_683495c_CHM_tmp.tif"
+
+$pit_fill
+[1] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chmfill/rgb_682494d_CHM_fill_tmp.tif"
+[2] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chmfill/rgb_682495b_CHM_fill_tmp.tif"
+[3] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chmfill/rgb_682495d_CHM_fill_tmp.tif"
+[4] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chmfill/rgb_683494c_CHM_fill_tmp.tif"
+[5] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chmfill/rgb_683495a_CHM_fill_tmp.tif"
+[6] "/scratch/project_2001208/Jonathan/ALS/stage1/test/output/tmp/rgb_682495b/chmfill/rgb_683495c_CHM_fill_tmp.tif"
+
+Stage 1 (pipeline) finished
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+Stage 2 finished (core tile extracted)
