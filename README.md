@@ -36,3 +36,7 @@ Deprecated script to detect timestamp duplicates (faulty measurements). Used for
 
 ## Outlier detection
 Deprecated first attempt at writing an outlier detection. Works, but the fine tuning takes too much time and in the end I had to do so much manual data curation anyways, it was easier to just manually remove extreme outliers.  
+
+# Acknowledgements
+This publication builds on many excellent open-source software, packages and libraries. Many thanks to the authors and maintainers who make this work possible. ❤️
+See [CREDITS.md](CREDITS.md) for details.
