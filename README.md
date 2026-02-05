@@ -1,5 +1,11 @@
 # HELMIMOD - A predictive model of summer near-ground temperatures in urban parks and forests for the City of Helsinki
 
+## HPC documentation
+High performance computing (HPC) was used to (pre-)process airborne laser scanning tiles and train/test the model. All HPC tasks were performed on CSC's Puhti supercomputer. Unfortunately, Puhti reached the end of his lifecycle in early to mid 2026 which may affect reproducibility in some parts. However, the general SLURM/Lustre logic stays the same regardless. Generally, all HPC analysis involving ALS tiles are embarassingly lazy (or almost) and were ran using single-core job arrays.
+
+### Filter_tiles.R
+The current approach to calculate DTMs and such from ALS causes issues and overhead because many tiles with little to no ground points exist (water, some edges). This script reduces the tile index to tiles that have ground points. The resulting reduced index should hopefully decrease runtime by reducing the number of tasks further and preventing workers being busy opening and closing tiles without ground points.
+
 ## STATIC VARIABLES
 Contains script to generate additional static predictors relevant to the model, mainly related to topography, water presence, and build-up matter. 
 ## CLF CONVERSION
@@ -40,6 +46,7 @@ Deprecated script to detect timestamp duplicates (faulty measurements). Used for
 
 ### Outlier detection
 Deprecated first attempt at writing an outlier detection. Works, but the fine tuning takes too much time and in the end I had to do so much manual data curation anyways, it was easier to just manually remove extreme outliers.  
+
 
 # Acknowledgements
 This publication builds on many excellent open-source software, packages and libraries. Many thanks to the authors and maintainers who make this work possible. ❤️
