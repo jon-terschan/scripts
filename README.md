@@ -3,22 +3,23 @@
 A short summary of the model, performance metrics and limitations.
 
 ## Performance
+Performance overview.
 ## Limitations
+Limitations overview.
 ## Acknowledgements
 This publication builds on many excellent open-source software, packages and libraries. Many thanks to the authors and maintainers who make this work possible. ❤️
 See [CREDITS.md](CREDITS.md) for details.
-
-# HPC
+## A note on HPC
 High-performance computing (HPC) was used to (pre-)process airborne laser scanning (ALS) tiles and model training & testing. ALS data sets are often structured as hundreds of tiles, making them suitable for (almost) embarassingly parallel HPC processing. We used CSC's Puhti supercomputer and acknowledge the computational resources contributed by CSC here. Unfortunately, Puhti reached the end of his lifecycle in early to mid 2026 which may affect reproducibility of the related scripts. Since the general SLURM/Lustre logic stays the same, it should be relatively straightforward to adapt the analyses to a different HPC system.
 
 ___
 
 # STATIC VARIABLES
 ## AIRBORNE LASER SCANNING DERIVED VARIABLES 
-### Downloading ALS files
+### Download
 Airborne lidar coverage of Helsinki is provided by the City of Helsinki. Unfortunately, the city's GUI for downloading open data (kartta.hel.fi) does not allow to download the data in bulk, creating the necessity to access the storage location directly. We retrieved the storage location using the developer view when creating a file request and used it to create a bulk downloader hel_lidar_tile_downloader. The downloader uses a file index hel_lidar_tiles.txt to request the data in a (hopefully) non-offensive way in bulk. The full download takes about 4-6 hours. Our file index was created by brute creating a faux index exploiting the coordinate-based naming convention of the tile (brute force) and filling the gaps manually.
 
-### Preparing ALS files
+### Preparation
 Extensive preparation was necessary to minimize 
 We removed all tiles without ground points, because they cannot be used to generate DTM (no points to triangulate from) and will just cause issues and overhead on the supercomputer. We relied on the City's preexisting classification of points for that. filter_tiles.R script creates a new index that only retains tiles with valid ground points and creates a output table for debugging with information. This reduced the amount of valid tiles from 1281 to (coincidentally) 1200.
 
