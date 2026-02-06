@@ -3,20 +3,23 @@
 A short summary of the model, performance metrics and limitations.
 
 # HPC
-We used high-performance computing (HPC) to (pre-)process airborne laser scanning tiles and train/test the model. HPC tasks were performed on CSC's Puhti supercomputer. Unfortunately, Puhti reached the end of his lifecycle in early to mid 2026 which may affect reproducibility in some parts. However, the general SLURM/Lustre logic stays the same regardless. Generally, all HPC analysis involving ALS tiles are embarassingly parallel (or almost) and were ran using single-core job arrays.
+High-performance computing (HPC) was used to (pre-)process airborne laser scanning tiles and train/test the model. Airborne Lidar data is commonly distributed in hundreds of tiles, making it suitable for (almost) embarassingly parallel HPC processing. We used CSC's Puhti supercomputer and acknowledge the computational resources contributed by CSC here. Unfortunately, Puhti reached the end of his lifecycle in early to mid 2026 which may affect reproducibility of the related scripts. Since the general SLURM/Lustre logic stays the same, it should be relatively straightforward to adapt the analyses to a different HPC system.
 
 # STATIC VARIABLES
-## AIRBORNE LASER SCANNING DERIVED VARIABLES
+## AIRBORNE LASER SCANNING DERIVED VARIABLES 
 ### Downloading ALS files
+Airborne lidar coverage of Helsinki is provided by the City of Helsinki. Unfortunately, the city's GUI for downloading open data (kartta.hel.fi) does not allow to download the data in bulk, creating the necessity to access the storage location directly. We retrieved the storage location using the developer view when creating a file request and used it to create a bulk downloader hel_lidar_tile_downloader. The downloader uses a file index hel_lidar_tiles.txt to request the data in a (hopefully) non-offensive way in bulk. The full download takes about 4-6 hours. Our file index was created by brute creating a faux index exploiting the coordinate-based naming convention of the tile (brute force) and filling the gaps manually.
+
 ### Preparing ALS files
-We remove files without ground points (relies on Helsinki ground classification) 1281 -> 1200 tiles.
-The reason for that is that they cannot be used for DTM generation and will cause issues and overhead on the supercomputer. Thus filter_tiles.R script creates a new index that only retains tiles with valid ground points and creates a output table for debugging with information.
+Extensive preparation was necessary to minimize 
+We removed all tiles without ground points, because they cannot be used to generate DTM (no points to triangulate from) and will just cause issues and overhead on the supercomputer. We relied on the City's preexisting classification of points for that. filter_tiles.R script creates a new index that only retains tiles with valid ground points and creates a output table for debugging with information. This reduced the amount of valid tiles from 1281 to (coincidentally) 1200.
 
-Homogenize files and assign correct CRS to header using las2las. 
+We then used the new index to homogenize the files and assign the correct CRS (EPSG:3879) to the .laz header using LASTOOLS las2las.
 las2las64 \ -i "$FILE" \ -o "$OUT_FILE" \ -set_point_type 6 \ -set_point_size 41 \ -epsg 3879 \ -olaz 
-This is done to prevent CRS mismatches due to wrongly assigned headers (we know native CRS is EPSG:3879) and warning messages due to mismatches in point size (.laz version context)
+Homogenization prevents CRS mismatches and warning messages due to .las/.laz version conflicts.
 
-Splitting the file list into 4 concurrent blocks because the array size on Puhti's small partition is capped to a maximum of 1000 total tasks. In embarassingly parallel lazy tasks using file lists as indexer such as the one used here, this prevents referential indexing via the task number (e.g. an array with tasks 900-1200 would not be allowed, despite being less a 1000 tasks.)
+Finally, we split the file index into 4 concurrent sub-indices (blocks), because the array size on Puhti's small partition is capped to a maximum of 1000 tasks. The reason for that is purely technical: In embarassingly parallel tasks that use file lists to index such as the one we used here, referential indexing via task number is no longer possible if the task maximum is exceeded. For instance, an array set to fulfill the tasks 900-1200 is not allowed on Puhti, despite the number of tasks being far below the threshold. To circumvent this, we split the index into four sub-indices and always create the same array (1-300%40).
+
 ### Stage 1: DTM, DSM, CHM, and normalized point clouds
 ### Stage 2: Canopy metrics
 ### Stage 3: SVF
