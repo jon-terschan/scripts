@@ -50,7 +50,7 @@ The first processing step was to derive digital topographic and surface models (
 
 ![A conceptual flowchart of stage 1](https://github.com/jon-terschan/scripts/blob/main/figures/stage1_concept.png)
 
-For each tile, neighbor tiles intersecting with a certain buffer distance are identified. For that reason, we need the spatial tile index `tile_index.gpkg` that was generated earlier. The pipeline then runs over the tile's full neighborhood (core tile + neighbor tile) and, in the end, copies the core tile results from a temporary location to a permanent output folder. Loading the full neighborhood is unfortunately necessary to prevent edge affects due to missing triangulation input. 
+For each tile, neighbor tiles intersecting with a certain buffer distance are identified. For that reason, we need the spatial tile index `tile_index.gpkg` that was generated earlier. The pipeline then runs over the tile's full neighborhood (core tile + neighbor tile) and, in the end, copies the core tile results from a temporary location to a permanent output folder. After the task, the temporary locations can be deleted. Loading the full neighborhood is unfortunately necessary to prevent edge affects due to missing triangulation input. 
 
 ### Stage 2: Canopy metrics
 The next step was to estimate canopy metrics from the canopy height models. The methodology here is described in detail in the corresponding publication, but generally, these are all relatively simple calculations. Neighborhoods are not needed here, so everything is embarassingly parallel in the truest sense. 
