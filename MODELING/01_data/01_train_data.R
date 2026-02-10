@@ -2,9 +2,7 @@
 # output, training data table
 source("scripts/00_config.R")
 
-
 # load and align all static rasters
-
 
 static_files <- list.files(static, pattern = "\\.tif$", full.names = TRUE)
 
