@@ -1,6 +1,7 @@
 # Purpose: download data from copernicus data store using cdsapi
 # REFERENCE: https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+Windows
 # import api, only works if the corresponding key file has been set up correctly
+
 import cdsapi
 
 # initialize API 
@@ -52,8 +53,8 @@ era_request = {
         "10m_v_component_of_wind",
         "total_precipitation"
     ],
-    "year": ["2025"],
-    "month": ["09"], # "06","07" "08", "09"
+    "year": ["2024"],
+    "month": ["05"], # "06","07" "08", "09"
     "day": [
         "01", "02", "03",
         "04", "05", "06",
