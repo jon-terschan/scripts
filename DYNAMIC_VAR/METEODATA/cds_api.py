@@ -80,12 +80,13 @@ era_request = {
     ],
     "data_format": "netcdf",
     "download_format": "unarchived",
-    "area": [59.9, 24.5, 60.4, 25.4] # regular grid
+    "area": [60.02, 24.7, 60.35, 25.30] #initial request
 }
 
+# ERA5 LAND INTERPOLATION Bug: will be fixed 25.2 according to the forums: https://forum.ecmwf.int/t/software-upgrade-for-data-extraction-of-a-geographical-area-from-selected-era5-and-seasonal-forecast-datasets/14583
 #"area": [60.02, 24.7, 60.35, 25.30] initial request
-
-era_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_25_09.netcdf" # target folder and name
+#"area": [59.9, 24.5, 60.4, 25.4] # regular grid
+era_target = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\NEW\ERA_SUMMER_24_05_02.netcdf" # target folder and name
 client.retrieve(dataset_era, era_request, era_target) # execute API request
 
 # dummy testing code from documentation

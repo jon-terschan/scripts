@@ -6,8 +6,8 @@ import xarray as xr
 # purpose: create ERA5 grid cell center points as gpkg to check in QGIS
 
 # import output
-path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\HELNORTH\ERA_SUMMER_24_05.netcdf"
-out_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\era5_centers.gpkg"
+path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\NEW\ERA_SUMMER_24_05_02.netcdf"
+out_path = r"\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\data\11.25\ERA\NEW\era5_centers_newest.gpkg"
 
 era = xr.open_dataset(path)
 

@@ -1,6 +1,8 @@
 
 # AIRBORNE LASER SCANNING DERIVED VARIABLES
 
+High-performance computing (HPC) was used to (pre-)process airborne laser scanning (ALS) tiles. ALS data sets are often composed of hundreds of tiles, making them suitable for (almost) embarassingly parallel HPC processing. Unfortunately, Puhti will be decommissioned in Spring 2026. Although this may affect the reproducibility of the provided scripts, it should be (relatively) straightforward to adapt the steps to a different HPC system, as the general SLURM/Lustre-related logic will be similar.
+
 ## Download
 
 Airborne lidar coverage of all of Helsinki is provided by the city administration. Unfortunately, the city's GUI for downloading open data ([kartta.hel.fi](https://kartta.hel.fi/)) does not allow bulk downloads. Therefore, we retrieved the storage location using the developer view when creating a file request and used it to create a bulk downloader `hel_lidar_tile_downloader.R`. It utilizes a tile index file `hel_lidar_tiles.txt` to request all data in a (hopefully) non-offensive way. The full download takes about 4-6 hours. The file index provided here was created by creating a faux index exploiting the coordinate-based naming convention of the tiles (brute force) and filling the gaps manually.
