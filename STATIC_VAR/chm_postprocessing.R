@@ -16,11 +16,9 @@ na <- is.na(chm)
 chm_filled <- chm
 chm_filled[na] <- focal(chm, w = 3, fun = max, na.rm = TRUE)[na]
 
-# second pass (5x5), only if needed
-if (global(is.na(chm_filled), "sum")[1] > 0) {
-  na <- is.na(chm_filled)
-  chm_filled[na] <- focal(chm_filled, w = 5, fun = max, na.rm = TRUE)[na]
-}
+# second pass (5x5)
+na <- is.na(chm_filled)
+chm_filled[na] <- focal(chm_filled, w = 5, fun = max, na.rm = TRUE)[na]
 
 writeRaster(
   chm_filled,
