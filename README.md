@@ -1,4 +1,4 @@
-# HELMI - Helsinki Microclimate Index: A predictive machine-learning model of Summer near-ground temperatures in Helsinki parks and urban forests.
+# HELMI - Helsinki Microclimate Index: A predictive machine-learning model of Summer near-ground temperatures in Helsinki parks and urban forests
 
 A short summary of the model, performance metrics and limitations. The model's target domain is urban parks and forests.
 
