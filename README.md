@@ -6,8 +6,7 @@ The full codebase for the (pre-)processing of predictors and tuning/training of 
 
 ## Performance
 
-We tuned hyperparameters by minimizing mean errors (RMSE, MSE, and bias) across 25 spatiotemporal cross-validation folds.
-Helmi's performance with the best performing hyperparameter set:
+We tuned hyperparameters by minimizing mean errors (RMSE, MSE, and bias) across 25 spatiotemporal cross-validation folds. Helmi's performance with the best performing hyperparameter set:
 
 * Mean RMSE
 * Mean MSE
