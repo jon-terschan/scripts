@@ -1,30 +1,38 @@
-# HELMI - Helsinki Microclimate Index: A predictive machine-learning model of Summer near-ground temperatures in Helsinki parks and urban forests
+# HELMI - Helsinki Microclimate Index: A predictive model of Summer near-ground temperatures in Helsinki parks and urban forests
 
-Helmi can predict **hourly near-ground air temperatures in Helsinki parks and urban forests** during the **leaf-on period (Summer)** at a **spatial resolution of 10 meters**. Helmi cannot predict temperatures in non-park environments and in other Seasons than Summer. Care should be taken when dealing with predictions in gardens. Although Helmi was trained with data from gardens, it was not specifically engineered to perform in these environments and predictions may be much 
+Helmi is a machine learning model (random forest) that can predict **hourly near-ground air temperatures in Helsinki parks and urban forests** during the **leaf-on period (Summer)** at a **spatial resolution of 10 meters**. Helmi uses in-situ temperature observations, canopy structure, sky occlusion, meteorological reference data, and land cover (see Predictors)
 
-
-A short summary of the model, performance metrics and limitations. Helmi's target domain is urban parks and forests. High-performance computing (HPC), in particular CSC's Puhti supercomputer (decommissioned in Spring 2026) was used to process airborne laser scanning (ALS) tiles and for model training, tuning, and predictions.
-
-We used spatiotemporal cross-validation to evaluate and tune the model. We retrained the production model with the best performing hyperparameters and predicted over an external data set from Kumpula Botanical Garden.
+This repository contains the full codebase for the (pre-)processing of predictors and tuning/training of Helmi. It contains some scripts designed to run on high-performance computing (HPC) systems, in particular CSC's Puhti supercomputer (decommissioned in Spring 2026), which was used to process airborne laser scanning (ALS) data and for model tuning and predictions.
 
 ## Performance
-Hyperparameters were tuned by minimizing mean RMSE, MSE, and bias across 25 spatiotemporal cross-validation folds.
-
+We tuned hyperparameters by minimizing mean errors (RMSE, MSE, and bias) across 25 spatiotemporal cross-validation folds.
 Helmi's performance with the best performing hyperparameter set:
+
 * Mean RMSE
 * Mean MSE
 * R2 (treat with care)
 
+Helmi's production version was also externally validated by predicting over an external data set from Kumpula Botanical Garden.
+
 ## Limitations
+Helmi cannot predict temperatures
 
-Limitations overview.
+* in non-park and forests urban environments, i.e., in and around "concrete jungle", as it was trained on temperature observations in vegetated urban areas.
 
-## Future improvements
+* in Seasons other than Summer and leaf-off conditions, as it was trained on observations from Helsinki's leaf-on period (May to September).
 
-* Change model to XGBoost
-* Incorporate detailed cloud information (e.g., hourly METEOSAT cloud masks) into the model.
+* in the future. Although it can be used as a baseline to study microclimatic response under hypothetical changes in the ambient climate (for example, in resarch), it is not, strictly speaking, a forecasting model.
+
+We assume Helmi's predictive performance to degrade
+
+* in urban green areas with a high amount of urban-natural mixed matter, such as gardens, sports fields, and so on. Although Helmi was trained with some data from gardens, it was not specifically designed to perform well in these environments.
+
+## Planned improvements
+
+* Test a change in model to XGBoost.
+* Incorporate detailed cloud information (e.g., hourly METEOSAT cloud masks).
 * Add variants: If interpolation is the goal and no historic data is needed, it would be smart to try out MEPS as ambient reference
-* Add more ERA5-Land fields (radiation flow, wind) as dynamic predictors.  
+* Add additional ERA5-Land fields (radiation flow, wind) as dynamic predictors.  
 
 ## Acknowledgements
 
@@ -40,7 +48,7 @@ If you use HELMI in academic work, please cite the associated publication and th
 **Primary reference**  
 Terschanski, J. (Year). *Title of the article*. Journal Name. DOI
 
-**Model**  
+**Helmi**  
 Terschanski, J. (2026). *HELMI — Helsinki Microclimate Index* (Version 0.0.1).  
 GitHub repository: https://github.com/jon-terschan/helsinki-microclimate-index  
 DOI: ENTER DOI WHEN READY
