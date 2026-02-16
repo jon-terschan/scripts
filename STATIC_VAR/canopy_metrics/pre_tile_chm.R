@@ -1,3 +1,6 @@
+# here i had a moment 
+# where i decided to split the CHM into different tiles
+# in order to run SVF calculation embarassingly parallel 
 library(terra)
 
 # -----------------------------

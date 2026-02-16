@@ -1,3 +1,7 @@
+# here we define a master grid template
+# based on the topographic metrics
+# all other predictors should adhere to this template
+# to harmonize train data creation and avoid any spatial mismatches
 
 dtm <- rast("//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/topo_metrics/topometrics/DTM_10m_Helsinki.tif")
 

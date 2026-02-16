@@ -116,18 +116,23 @@ chm_0_5_aligned <- resample(chm_05, tpl_0_5, method = "near",
       "BIGTIFF=YES"
     ))
 
+
+
+chm_0_5_aligned <- "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/chm_full/chm_resampled/CHM_0_5m_aligned.tif"    
+chm_0_5_aligned <- rast(chm_0_5_aligned)
+
 ext(chm_0_5_aligned)
-ext(dtm_10)          # should be 10 10
+ext(dtm_10)       
+   # should be 10 10
 print(res(chm_10_max))      # should be 10 10
-print(compareGeom(chm_0_5_aligned, dtm_10, stopOnError = FALSE))  # should be TRUE
+print(compareGeom(chm_10_max, dtm_10, stopOnError = FALSE))  # should be TRUE
 print(compareGeom(dtm_10, dtm_10, stopOnError = FALSE)) 
-# ---- optional: remove extreme spikes BEFORE aggregation (small focal median or percentile cap) ----
 
 fact <- 20 # factor 20 because its 0.5 -> 10 m 
 
 # (A) MAX
-chm_10_max_file <- file.path(out_dir, "CHM_10m_MAX.tif")
-chm_10_max <- aggregate(chm_0_5_aligned, fact = fact, fun = max, na.rm = TRUE,
+chm_10_max_file <- file.path(out_dir, "CHM_10m_MED.tif")
+chm_10_max <- aggregate(chm_0_5_aligned, fact = fact, fun = median, na.rm = TRUE,
                         filename = chm_10_max_file, overwrite = TRUE, 
                         gdal = c(
       "TILED=YES",
@@ -157,6 +162,3 @@ print(res(dtm_10))          # should be 10 10
 print(res(chm_10_max))      # should be 10 10
 print(compareGeom(dtm_10, chm_10_max, stopOnError = FALSE))  # should be TRUE
 print(compareGeom(dtm_10, dtm_10, stopOnError = FALSE)) 
-# coverage fraction (proportion of master cells with CHM data)
-frac_cov <- global(!is.na(chm_10_max), "mean", na.rm = TRUE)
-print(frac_cov)
