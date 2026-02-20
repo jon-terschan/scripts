@@ -1,13 +1,15 @@
 # ==========================================
 # 05_aggregate_tuning_results.R
 # ==========================================
-# Aggregates per-fold CV results across
-# hyperparameter sets, only works if the results
-# are downloaded and stored in the expected locations
+# aggregates per-fold CV results across
+# hyperparameter sets
+# this assumes the tuning ran on HPC, the results are downloaded
+# and stored in the DATA folder
+
 library(dplyr)
 library(purrr)
 
-# input params\\ad.helsinki.fi\home\t\terschan\Desktop\paper1\scripts\DATA\modeling\02_tuningresults
+# input
 results_dir <- "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/02_tuningresults/"
 out_file <- "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/02_tuningresults/tuning_summary_1.rds"
 param_grid <- readRDS("//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/MODELING/02_model/HPC_files/tuning_grid_40.rds")
@@ -19,10 +21,8 @@ files <- list.files(
   full.names = TRUE
 )
 
-# read all
+# read and aggregate
 all_results <- map_dfr(files, readRDS)
-
-# aggregate all
 summary_df <- all_results %>%
   group_by(param_id) %>%
   summarise(
@@ -42,7 +42,8 @@ summary_df <- all_results %>%
 # join with hyperparameter grid to show best model choices
 summary_df <- summary_df %>%
   left_join(param_grid, by = "param_id")
+summary_df
 
-# export
+# export so it can be used to tune the final model
 saveRDS(summary_df, out_file)
-print(head(summary_df, 10))
+print(head(summary_df, 10)) # check output CURIOUS

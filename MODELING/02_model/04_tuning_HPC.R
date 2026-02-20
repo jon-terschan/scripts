@@ -1,17 +1,26 @@
 # ==========================================
 # Runs full 5x5 CV for ONE hyperparameter set
 # ==========================================
+# this is the batch script that trains the model
+# 25x on one row of the hyperparameter set
+# predicts on the other folds
+# and then exports common accuracy metrics for later use
+
 library(dplyr)
 library(ranger)
 
 set.seed(42)
+
 # ------------------------------------------
 # DEBUG SETTINGS
 # ------------------------------------------
-MAX_FOLDS <- Inf   # set to Inf for full CV
+# this allows me to run the script for just a few folds, it has no 
+# other reason except debugging
+# set to Inf for full CV
+MAX_FOLDS <- Inf  
 
 # ------------------------------------------
-# 1) IDENTIFY PARAM ID TO SLURM
+# IDENTIFY PARAM ID TO SLURM
 # ------------------------------------------
 param_id <- as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID"))
 
@@ -22,7 +31,7 @@ if (is.na(param_id)) {
 cat("Running parameter set:", param_id, "\n")
 
 # ------------------------------------------
-# 2) LOAD LOCALLY PREPARED DATA AND ERROR METRICS
+# LOAD LOCALLY PREPARED DATA AND ERROR METRICS
 # ------------------------------------------
 train_model <- readRDS("/scratch/project_2001208/Jonathan/model/data/processed/ML/fold_train.rds")
 fold_defs   <- readRDS("/scratch/project_2001208/Jonathan/model/data/processed/ML/fold_defs.rds")
@@ -35,7 +44,7 @@ params <- param_grid[param_id, ]
 print(params)
 
 # ------------------------------------------
-# 3) RUN CV 
+# RUN CV TUNING
 # ------------------------------------------
 n_folds <- min(MAX_FOLDS, nrow(fold_defs))
 results <- vector("list", n_folds)
@@ -81,7 +90,7 @@ for (i in seq_len(n_folds)) {
 results_df <- bind_rows(results)
 
 # ------------------------------------------
-# 4) SAVE RESULTS
+# SAVE RESULTS
 # ------------------------------------------
 outfile <- paste0("/scratch/project_2001208/Jonathan/model/logs/model/out/tuning_results/results_param_", param_id, ".rds")
 saveRDS(results_df, outfile)

@@ -1,8 +1,9 @@
-# we stack the static predictors into a multiband raster
-# this makes data retrieval for training data set prep and later predictions
-# a bit easier, its technically superfluous, but it feels acocmplishing
+# here, we stack the static predictors into a multiband raster (stack)
+# to facilitate data retrieval for the training data set and later predictions
+# this step is technically superfluous but it gives me a personal sense of accomplishments
+# and is a good bullshit test for grid alignment
 
-library(terra) # as always
+library(terra)
 
 # paths
 pred_dir <- "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/predictorstack/"
@@ -66,28 +67,27 @@ writeRaster(
   gdal = "COMPRESS=ZSTD"
 )
 
+#diagnostics in case the stacking fails, compare resolution, extent and such
+#files <- list.files(pred_dir, pattern="\\.tif$", full.names=TRUE)
+#files
+#rasters <- lapply(files, rast)
 
-#diagnostics, comment out later
-files <- list.files(pred_dir, pattern="\\.tif$", full.names=TRUE)
-files
-rasters <- lapply(files, rast)
+#meta <- do.call(rbind, lapply(files, function(f) {
+#  r <- rast(f)
+#  e <- ext(r)
+#  
+#  data.frame(
+#    filename = basename(f),
+#    res_x = res(r)[1],
+#    res_y = res(r)[2],
+#    xmin  = e[1],
+#    xmax  = e[2],
+#    ymin  = e[3],
+#    ymax  = e[4],
+#    ncol  = ncol(r),
+#    nrow  = nrow(r),
+#    stringsAsFactors = FALSE
+#  )
+#}))
 
-meta <- do.call(rbind, lapply(files, function(f) {
-  r <- rast(f)
-  e <- ext(r)
-  
-  data.frame(
-    filename = basename(f),
-    res_x = res(r)[1],
-    res_y = res(r)[2],
-    xmin  = e[1],
-    xmax  = e[2],
-    ymin  = e[3],
-    ymax  = e[4],
-    ncol  = ncol(r),
-    nrow  = nrow(r),
-    stringsAsFactors = FALSE
-  )
-}))
-
-meta
+#meta

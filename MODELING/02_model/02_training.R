@@ -18,7 +18,7 @@ tuning_summary <- readRDS("//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scrip
 best_params <- tuning_summary %>%
   arrange(mean_rmse) %>%
   slice(1)
-best_params
+names(best_params)
 
 # -------------------------------
 # MODEL FIT
@@ -32,11 +32,10 @@ rf_final <- ranger(
   sample.fraction = best_params$sample.fraction,
   importance = rf_fixed$importance,
   #respect.unordered.factors = rf_fixed$respect.unordered.factors,
-  seed = rf_fixed$seed
+  seed = rf_fixed$seed,
+  oob.error = FALSE # not needed here
 )
 
-# save output
-saveRDS(rf_final, "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/MODELING/02_model/models/helmi_final.rds"
-)
-
-glimpse(rf_final)
+# save final model
+saveRDS(rf_final, "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/03_model/01_helmi_2000_LAGGED.rds")
+# glimpse(rf_final)

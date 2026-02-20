@@ -1,9 +1,14 @@
-library(dplyr)
-# str(train)
-train_joined <- readRDS("//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/06_train_data.rds")
+# the purpose of this script is to summarize the feature
+# space defined by the train data. from that info, we can already infer 
+# limitations and target domains of the final model
 
-# export summary statistics about train data
-glimpse(train_joined)
+library(dplyr)
+
+# load train data
+train_joined <- readRDS("//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/06_train_data.rds")
+glimpse(train_joined) # check its the right data
+
+# summary statistic
 sensor_static <- train_joined %>%
   st_drop_geometry() %>%
   group_by(sensor_id) %>%
@@ -26,14 +31,10 @@ sensor_static <- train_joined %>%
     .groups = "drop"
   )
 
-glimpse(sensor_static)
-write.csv(sensor_static,
-          "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/train_data_summary.csv",
-          row.names = FALSE)
-
+write.csv(sensor_static, "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/train_data_summary.csv", row.names = FALSE)
 train_sum <- read.csv("//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/train_data_summary.csv")
 
-
+# quantify feature space
 train_sum %>%
   select(-sensor_id) %>%   # remove IDs or other non-predictors
   summarise(

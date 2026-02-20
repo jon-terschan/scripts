@@ -1,8 +1,9 @@
 # ===============================
 # local test of the tuning loop 
 # ==============================
-# this just runs the tuning loop with 1 
-# hyperparameter set and 2 folds to check code and outcome works as expected
+# this runs the tuning loop with 1 hyperparameter combination
+# on 2 folds to check code and outcome works as expected
+# essentially a preparation stage before commiting to HPC
 
 library(dplyr)
 library(ranger)
