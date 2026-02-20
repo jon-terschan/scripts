@@ -10,6 +10,7 @@ library(sf)
 library(dplyr)
 library(blockCV)
 library(units)
+library(data.table)
 
 set.seed(42)
 
@@ -99,7 +100,7 @@ cv_sp <- cv_spatial(
 # 5) Inspect fold balance
 # -------------------------------
 print(table(cv_sp$folds_ids))
-c
+
 # -------------------------------
 # 6) Map spatial folds back to rows
 # -------------------------------
@@ -182,7 +183,11 @@ summary(fold_sizes)
 
 # drop geogmetry if still present and then
 train_model <- train %>%
-  st_drop_geometry()  
+  st_drop_geometry() %>%
+  drop_na() 
+
+glimpse(train_model)
+sum(is.na(train_model))
 
 saveRDS(train_model,
         "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/MODELING/02_model/HPC_files/fold_train.rds",
@@ -221,7 +226,7 @@ message("Number of predictors: ", p)
 
 # establish grid
 param_grid <- CJ(
-  mtry = c(5, 8, 12, 18, 24),
+  mtry = unique(round(c(sqrt(p), p/4, p/3, p/2, p * 0.75))),
   min.node.size = c(5, 10, 20, 40),
   sample.fraction = c(0.6, 0.8)
 )
@@ -232,7 +237,14 @@ setcolorder(param_grid,
               "min.node.size",
               "sample.fraction")
               )
-#print(param_grid)
+print(param_grid)
 
 # save
 saveRDS(param_grid, "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/MODELING/02_model/HPC_files/tuning_grid_40.rds", compress = "xz")
+
+
+
+cor_matrix <- cor(train_model %>%
+                    select(-temp),
+                  use = "pairwise.complete.obs")
+cor_matrix

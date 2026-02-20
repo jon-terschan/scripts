@@ -22,3 +22,13 @@ Notably, most of the training data assembly is handled in R, but the ERA5-Land v
 
 ## 03_predictions
 As the name implies, this contains script to predict using the final model. There is one script to predict a single time stamp locally, and another one written to run embarassingly parallel on HPC, as well as a batch script for the same purpose.
+
+# predictors
+## Notes
+
+* 10 m building fraction is a nice looking raster layer but in terms of modeling its probably noise that can be cut, because there is no variance of it represented in the training data. 50 m building fraction is the one we should keep.
+
+* Lagged predictors are nice for forecasting, but if they dont increase the model by a lot, I will cut them.
+
+
+## lagged predictors

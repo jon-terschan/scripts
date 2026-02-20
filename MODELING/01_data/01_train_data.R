@@ -392,23 +392,3 @@ glimpse(train)
 
 # str(train)
 saveRDS(train, "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/06_train_data.rds")
-
-# export summary statistics about train data
-library(dplyr)
-sensor_static <- train_joined %>%
-  st_drop_geometry() %>%
-  group_by(sensor_id) %>%
-  summarise(
-    n_rows = n(),
-    n_temp_obs = sum(!is.na(temp)),
-    CC = first(CC),
-    UCC = first(uCC),
-    PAI = first(PAI),
-    elev_10 = first(elev_10),
-    slope = first(slope),
-    bld_fr_10 = first(bldg_fr_10),
-    .groups = "drop"
-  )
-write.csv(sensor_static,
-          "//ad.helsinki.fi/home/t/terschan/Desktop/paper1/scripts/DATA/modeling/01_traindataprep/train_data_summary.csv",
-          row.names = FALSE)
