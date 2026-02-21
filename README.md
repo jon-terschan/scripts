@@ -1,4 +1,4 @@
-![A conceptualized logo of the Helsinki Microclimate Index](https://github.com/jon-terschan/scripts/blob/main/figures/helmilogo_github.png)
+<img src="https://github.com/jon-terschan/scripts/blob/main/figures/helmilogo_github.png" width="50%">
 
 # A predictive model of Summer near-ground temperatures in Helsinki urban green spaces🌲☀️
 
